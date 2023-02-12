@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2023-02-12 00:14
+-- Generated: 2023-02-12 00:57
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Supplier` (
   `Supplier_Fax` INT(12) NULL DEFAULT NULL,
   `Supplier_NIF` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`Supplier_Id`, `SupplierAdress_SupplierAdress_Id`),
-  -- INDEX `fk_Supplier_SupplierAdress 1_idx` (`SupplierAdress_SupplierAdress_Id` ASC) VISIBLE,
+  UNIQUE INDEX `fk_Supplier_SupplierAdress 1_idx` (`SupplierAdress_SupplierAdress_Id` ASC) VISIBLE,
   CONSTRAINT `fk_Supplier_SupplierAdress 1`
     FOREIGN KEY (`SupplierAdress_SupplierAdress_Id`)
     REFERENCES `databaseglasses`.`SupplierAdress` (`SupplierAdress_Id`)
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Glasses` (
   `GlassColour` VARCHAR(50) NULL DEFAULT NULL,
   `Price` INT(11) NOT NULL,
   PRIMARY KEY (`BrandId`),
-  -- INDEX `fk_Glasses_Supplier 1_idx` (`SupplierId` ASC) VISIBLE,
-  -- INDEX `fk_Glasses_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
+  UNIQUE INDEX `fk_Glasses_Supplier 1_idx` (`SupplierId` ASC) INVISIBLE,
+  UNIQUE INDEX `fk_Glasses_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
   CONSTRAINT `fk_Glasses_Supplier 1`
     FOREIGN KEY (`SupplierId`)
     REFERENCES `databaseglasses`.`Supplier` (`Supplier_Id`)
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Clients` (
   `Email` VARCHAR(50) NULL DEFAULT NULL,
   `DataRegister` DATETIME NOT NULL,
   PRIMARY KEY (`Client_Id`),
-  INDEX `fk_Clients_Clients 1_idx` (`RecomentClient` ASC) VISIBLE,
+  UNIQUE INDEX `fk_Clients_Clients 1_idx` (`RecomentClient` ASC) VISIBLE,
   CONSTRAINT `fk_Clients_Clients 1`
     FOREIGN KEY (`RecomentClient`)
     REFERENCES `databaseglasses`.`Clients` (`Client_Id`)
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Employee` (
   `Name` VARCHAR(50) NULL DEFAULT NULL,
   `Surname` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`EmployeeId`, `Client_Id`),
-  -- INDEX `fk_Employee_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
+  UNIQUE INDEX `fk_Employee_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
   CONSTRAINT `fk_Employee_Clients 1`
     FOREIGN KEY (`Client_Id`)
     REFERENCES `databaseglasses`.`Clients` (`Client_Id`)
