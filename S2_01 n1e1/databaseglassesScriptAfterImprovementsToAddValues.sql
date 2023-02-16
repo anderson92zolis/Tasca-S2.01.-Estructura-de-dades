@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2023-02-12 00:57
+-- Generated: 2023-02-16 00:02
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -14,28 +14,27 @@ CREATE SCHEMA IF NOT EXISTS `databaseglasses` DEFAULT CHARACTER SET utf8 ;
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`Supplier` (
   `Supplier_Id` INT(12) NOT NULL AUTO_INCREMENT,
   `Supplier_Name` VARCHAR(50) NOT NULL,
-  `SupplierAdress_SupplierAdress_Id` INT(12) NOT NULL,
   `Supplier_PhoneNumber` INT(12) NOT NULL,
   `Supplier_Fax` INT(12) NULL DEFAULT NULL,
   `Supplier_NIF` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`Supplier_Id`, `SupplierAdress_SupplierAdress_Id`),
-  UNIQUE INDEX `fk_Supplier_SupplierAdress 1_idx` (`SupplierAdress_SupplierAdress_Id` ASC) VISIBLE,
-  CONSTRAINT `fk_Supplier_SupplierAdress 1`
-    FOREIGN KEY (`SupplierAdress_SupplierAdress_Id`)
-    REFERENCES `databaseglasses`.`SupplierAdress` (`SupplierAdress_Id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  PRIMARY KEY (`Supplier_Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`SupplierAdress` (
-  `SupplierAdress_Id` INT(12) NOT NULL AUTO_INCREMENT,
+  `Supplier_Supplier_Id` INT(12) NOT NULL AUTO_INCREMENT,
   `NameStreet` VARCHAR(50) NOT NULL,
   `Floor` VARCHAR(50) NULL DEFAULT NULL,
   `Door` VARCHAR(50) NOT NULL,
-  `City` VARCHAR(50) NOT NULL,
+  `City` VARCHAR(50) NULL DEFAULT NULL,
   `CP` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`SupplierAdress_Id`))
+  PRIMARY KEY (`Supplier_Supplier_Id`),
+  INDEX `fk_SupplierAdress_Supplier 1_idx` (`Supplier_Supplier_Id` ASC) VISIBLE,
+  CONSTRAINT `fk_SupplierAdress_Supplier 1`
+    FOREIGN KEY (`Supplier_Supplier_Id`)
+    REFERENCES `databaseglasses`.`Supplier` (`Supplier_Id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -49,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Glasses` (
   `FrameColour` VARCHAR(50) NULL DEFAULT NULL,
   `GlassColour` VARCHAR(50) NULL DEFAULT NULL,
   `Price` INT(11) NOT NULL,
-  PRIMARY KEY (`BrandId`),
+  PRIMARY KEY (`BrandId`, `SupplierId`),
   UNIQUE INDEX `fk_Glasses_Supplier 1_idx` (`SupplierId` ASC) INVISIBLE,
-  UNIQUE INDEX `fk_Glasses_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
+  INDEX `fk_Glasses_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
   CONSTRAINT `fk_Glasses_Supplier 1`
     FOREIGN KEY (`SupplierId`)
     REFERENCES `databaseglasses`.`Supplier` (`Supplier_Id`)
@@ -67,34 +66,34 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`Clients` (
   `Client_Id` INT(12) NOT NULL AUTO_INCREMENT,
-  `RecomentClient` INT(12) NULL DEFAULT NULL,
   `Name` VARCHAR(50) NOT NULL,
   `Address` VARCHAR(50) NULL DEFAULT NULL,
   `Phone` INT(12) NOT NULL,
   `Email` VARCHAR(50) NULL DEFAULT NULL,
   `DataRegister` DATETIME NOT NULL,
-  PRIMARY KEY (`Client_Id`),
-  UNIQUE INDEX `fk_Clients_Clients 1_idx` (`RecomentClient` ASC) VISIBLE,
+  `RecommentClient` INT(12) NULL DEFAULT NULL COMMENT 'Recomment clients if exists,',
+  `SellsAttends_EmployeeId` INT(12) NOT NULL,
+  PRIMARY KEY (`Client_Id`, `SellsAttends_EmployeeId`),
+  INDEX `fk_Clients_Clients 1_idx` (`RecommentClient` ASC) INVISIBLE,
+  INDEX `fk_Clients_Employee 1_idx` (`SellsAttends_EmployeeId` ASC) INVISIBLE,
   CONSTRAINT `fk_Clients_Clients 1`
-    FOREIGN KEY (`RecomentClient`)
+    FOREIGN KEY (`RecommentClient`)
     REFERENCES `databaseglasses`.`Clients` (`Client_Id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Clients_Employee 1`
+    FOREIGN KEY (`SellsAttends_EmployeeId`)
+    REFERENCES `databaseglasses`.`Employee` (`EmployeeId`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`Employee` (
-  `EmployeeId` INT(12) NOT NULL,
-  `Client_Id` INT(12) NOT NULL,
+  `EmployeeId` INT(12) NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(50) NULL DEFAULT NULL,
   `Surname` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`EmployeeId`, `Client_Id`),
-  UNIQUE INDEX `fk_Employee_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
-  CONSTRAINT `fk_Employee_Clients 1`
-    FOREIGN KEY (`Client_Id`)
-    REFERENCES `databaseglasses`.`Clients` (`Client_Id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  PRIMARY KEY (`EmployeeId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
