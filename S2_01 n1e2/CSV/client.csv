@@ -1,0 +1,4 @@
+Client_Id,Name,Surname,AdressStreet,PostCode,Location_Location_Id,Province_Province_Id,PhoneNumber
+1,ANDER,ZOLIS,"CORSEGA 1",08021,1,1,682838775
+2,KEVIN,CHI,"UNIVERSIDAD 3",08029,2,2,682121212
+3,JUAN,PIR,"GRANVIA 2",08080,3,3,NULL

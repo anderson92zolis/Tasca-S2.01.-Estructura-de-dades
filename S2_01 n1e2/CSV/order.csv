@@ -1,0 +1,2 @@
+Order_Id,Client_Id,Shop_Shop_Id,DeliveryEmployer_Employee_Id,OrderDate,PickUp_Store_TakeAway,TotalPrice
+1,1,1,1,"2023-02-23 00:00:00",PickUP,123
