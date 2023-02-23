@@ -1,0 +1,3 @@
+Sell_id,Sell_name,Sell_date,Clients_Client_Id,Employee_EmployeeId,Glasses_BrandId
+1,Michael,2022-12-12,2,1,2
+2,Michael,2022-12-13,1,1,2

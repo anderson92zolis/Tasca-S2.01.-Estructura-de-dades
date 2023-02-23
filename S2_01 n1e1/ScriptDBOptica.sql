@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2023-02-22 16:38
+-- Generated: 2023-02-23 16:54
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -24,11 +24,11 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`SupplierAdress` (
   `Supplier_Supplier_Id` INT(12) NOT NULL AUTO_INCREMENT,
   `NameStreet` VARCHAR(50) NOT NULL,
-  `Floor` VARCHAR(50) NULL DEFAULT NULL,
+  `Floor` VARCHAR(50) NOT NULL,
   `Door` VARCHAR(50) NOT NULL,
-  `City` VARCHAR(50) NULL DEFAULT NULL,
+  `City` VARCHAR(50) NOT NULL,
   `CP` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`Supplier_Supplier_Id`),
+  PRIMARY KEY (`Floor`),
   INDEX `fk_SupplierAdress_Supplier 1_idx` (`Supplier_Supplier_Id` ASC) VISIBLE,
   CONSTRAINT `fk_SupplierAdress_Supplier 1`
     FOREIGN KEY (`Supplier_Supplier_Id`)
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `databaseglasses`.`Glasses` (
   `FrameColour` VARCHAR(50) NULL DEFAULT NULL,
   `GlassColour` VARCHAR(50) NULL DEFAULT NULL,
   `Price` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`BrandId`, `SupplierId`),
+  PRIMARY KEY (`BrandId`),
   UNIQUE INDEX `fk_Glasses_Supplier 1_idx` (`SupplierId` ASC) INVISIBLE,
   INDEX `fk_Glasses_Clients 1_idx` (`Client_Id` ASC) VISIBLE,
   CONSTRAINT `fk_Glasses_Supplier 1`
@@ -84,8 +84,8 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `databaseglasses`.`Employee` (
   `EmployeeId` INT(12) NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(50) NULL DEFAULT NULL,
-  `Surname` VARCHAR(50) NULL DEFAULT NULL,
+  `Name` VARCHAR(50) NOT NULL,
+  `Surname` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`EmployeeId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
