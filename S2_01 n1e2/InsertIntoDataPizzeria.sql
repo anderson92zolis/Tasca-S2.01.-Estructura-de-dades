@@ -55,13 +55,15 @@ INSERT INTO `databasepizzeria`.`employee` (`Employee_Id`, `Shop_Id`, `Name`, `Su
 DELETE FROM deliver;
 INSERT INTO `databasepizzeria`.`deliver` (`Employee_Id`, `Name`, `DataTime`) VALUES (1, 'Carlos', '2022-01-05 15:30:00');
 INSERT INTO `databasepizzeria`.`deliver` (`Employee_Id`, `Name`, `DataTime`) VALUES (3, 'Antonio', '2022-02-15 20:15:00');
+INSERT INTO `databasepizzeria`.`deliver` (`Employee_Id`, `Name`, `DataTime`) VALUES ('4', 'Maria ', '2022-04-04 11:45:00');
+
 
 DELETE FROM `databasepizzeria`.`order`;
 alter table `databasepizzeria`.`order` AUTO_INCREMENT = 1;
 INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '1', '1', '2022-01-05 14:30:00', 'TakeAway', '23.50', '1');
 INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '2', '1', '2022-02-15 19:15:00', 'TakeAway', '12.99', '1');
 INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '3', '2', '2022-03-21 12:00:00', 'TakeAway', '45.80', '3');
-INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '4', '3', '2022-04-04 10:45:00', 'TakeAway', '16.75', '1');
+INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '4', '3', '2022-04-04 10:45:00', 'TakeAway', '16.75', '4');
 INSERT INTO `databasepizzeria`.`order` (`Order_Id`, `Client_Id`, `Shop_Shop_Id`, `OrderDate`, `PickUp_Store_TakeAway`, `TotalPrice`, `Deliver_Employee_Id`) VALUES (null, '5', '4', '2022-05-10 21:00:00', 'TakeAway', '27.99', '3');
 
 DELETE FROM `databasepizzeria`.`order_has_product`;
